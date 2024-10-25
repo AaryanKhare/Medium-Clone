@@ -1,0 +1,10 @@
+{
+  "name": "@100xdevs/medium-common",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "dependencies": {
+    "@100xdevs/medium-common": "^1.0.0",
+    "zod": "^3.23.8"
+  }
+}
