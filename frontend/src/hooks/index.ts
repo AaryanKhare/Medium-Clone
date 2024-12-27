@@ -4,12 +4,12 @@ import { BACKEND_URL } from "../pages/config";
 
 export interface Blog {
     "content": string,
+    "createdAt":true,
     "title" : string,
     "id" : number,
     "author" : {
         "name" : string
     } 
-
 }
 
 export const useBlog = ({id}: {id:string}) => {
@@ -24,7 +24,8 @@ export const useBlog = ({id}: {id:string}) => {
         })
 
             .then(response => {
-                setBlog(response.data.blog);
+                setBlog(response.data);
+                console.log(response.data);
                 setLoading(false);
             })
     }, [id])
@@ -47,12 +48,14 @@ export const useBlogs = () => {
 
             .then(response => {
                 setBlogs(response.data);
+                console.log(response.data);
                 setLoading(false);
             })
     }, [])
 
     return{
         loading,
-        blogs
+        blogs,
+        setBlogs
     }
 }

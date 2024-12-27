@@ -36,3 +36,4 @@ export const Blog = () => {
             <FullBlog blog={blog}/>
         </div>
 }
+

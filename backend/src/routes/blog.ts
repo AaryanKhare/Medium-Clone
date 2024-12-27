@@ -115,9 +115,9 @@ blogRouter.get("/bulk", async(c) => {
         }
     })
 
-    return c.json({
+    return c.json(
         post
-    })
+    )
 })
 
 blogRouter.get("/:id", async (c) => {
@@ -141,9 +141,9 @@ blogRouter.get("/:id", async (c) => {
                 }
             }
         })
-        return c.json({
+        return c.json(
             post
-        })
+        )
     }catch(e){
         c.status(411);
         return c.json({
@@ -152,3 +152,27 @@ blogRouter.get("/:id", async (c) => {
     }
 })
 
+blogRouter.delete("/:id", async (c) => {
+    const id = c.req.param("id");
+    const prisma = new PrismaClient({
+        datasourceUrl: c.env.DATABASE_URL,
+    }).$extends(withAccelerate())
+
+    try{
+        const post = await prisma.post.delete({
+            where: {
+                id: String(id),
+            },
+        })
+       
+        return c.json({
+            success: true,
+            message: "Blog has been deleted"
+        })
+    }catch(e){
+        c.status(411);
+        return c.json({
+            message: "err while deleting a blog post"
+        })
+    }
+})

@@ -50,17 +50,7 @@ export const Auth = ({ type }: { type: "signup" | "signin" }) => {
                             }));
                         }} 
                     /> : "" }
-                    <LabelledInput 
-                        label="Password" 
-                        type="password" 
-                        placeholder="123456" 
-                        onChange={(e) => {
-                            setPostInputs((prev) => ({
-                                ...prev,
-                                password: e.target.value
-                            }));
-                        }} 
-                    />
+                    
                     <LabelledInput 
                         label="Username" 
                         placeholder="ak@gmail.com" 
@@ -69,6 +59,17 @@ export const Auth = ({ type }: { type: "signup" | "signin" }) => {
                             setPostInputs((prev) => ({
                                 ...prev,
                                 username: e.target.value
+                            }));
+                        }} 
+                    />
+                    <LabelledInput 
+                        label="Password" 
+                        type="password" 
+                        placeholder="123456" 
+                        onChange={(e) => {
+                            setPostInputs((prev) => ({
+                                ...prev,
+                                password: e.target.value
                             }));
                         }} 
                     />
