@@ -52,7 +52,8 @@ export const Blogs = () => {
                         authorName={blog.author.name || "Anonymous"}
                         title={blog.title}
                         content={blog.content}
-                        publishedDate={new Date(blog.createdAt).toISOString()}
+                        // publishedDate={new Date(blog.created_at).toISOString()}
+                        publishedDate={new Date(blog.created_at || "1970").toLocaleDateString()}
                     />) : <h1>No Blogs yet.</h1>}
             </div>
         </div>

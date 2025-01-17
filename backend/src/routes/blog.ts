@@ -107,6 +107,7 @@ blogRouter.get("/bulk", async(c) => {
             content: true,
             title: true,
             id: true,
+            created_at: true,
             author: {
                 select: {
                     name: true
@@ -131,9 +132,7 @@ blogRouter.get("/:id", async (c) => {
             where: {
                 id: String(id)
             },
-            select: {
-                title: true,
-                content: true,
+            include:{
                 author: {
                     select: {
                         name: true
@@ -175,4 +174,27 @@ blogRouter.delete("/:id", async (c) => {
             message: "err while deleting a blog post"
         })
     }
+})
+
+blogRouter.get("/bulk", async(c) => {
+    const prisma = new PrismaClient({
+        datasourceUrl: c.env.DATABASE_URL,
+    }).$extends(withAccelerate())
+    const post = await prisma.post.findMany({
+        select: {
+            content: true,
+            title: true,
+            id: true,
+            created_at: true,
+            author: {
+                select:{
+                    name: true
+                }
+            }
+        }
+    })
+
+    return c.json(
+        post
+    )
 })

@@ -2,6 +2,8 @@
 import { Blog } from "../hooks"
 import { Avatar } from "./BlogCard"
 export const FullBlog = ({blog}:{blog: Blog}) => {
+    let createdAt = new Date(blog.created_at || "1970-01-01");
+    let formattedDate = new Intl.DateTimeFormat('en-GB').format(createdAt); 
     return <div>
           
             <div className="justfiy-center flex">
@@ -11,7 +13,7 @@ export const FullBlog = ({blog}:{blog: Blog}) => {
                     {blog.title}
                     </div>
                     <div className="text-slate-500 pt-2">
-                        posted on 2nd december 2023
+                    posted on posted {formattedDate}
                     </div>
                     <div className="pt-4">
                         {blog.content}
@@ -23,7 +25,7 @@ export const FullBlog = ({blog}:{blog: Blog}) => {
                     </div>
                     <div className="flex-w-full">
                         <div className="pr-4 flex flex-col justify-center">
-                            <Avatar size = "big" name = {blog.author.name || "anonymomus"} ></Avatar>
+                            <Avatar size = "big" name = {blog.author.name || "anonymous"} ></Avatar>
                         </div>
                         <div className="text-xl font-bold">
                     {blog.author.name || "anonymous"}

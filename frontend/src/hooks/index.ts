@@ -4,7 +4,7 @@ import { BACKEND_URL } from "../pages/config";
 
 export interface Blog {
     "content": string,
-    "createdAt":true,
+    "created_at":string,
     "title" : string,
     "id" : number,
     "author" : {
@@ -39,8 +39,10 @@ export const useBlogs = () => {
     const [loading, setLoading] = useState(true);
     const [blogs, setBlogs] = useState<Blog[]>([]);
 
+    const token = localStorage.getItem("token");
+    
     useEffect(()=>{
-        axios.get(`${BACKEND_URL}/api/v1/blog/bulk`,{
+        axios.get(`${BACKEND_URL}/api/v1/blog/bulk/${token ? "userBlogs":"blogs"}`,{
             headers: {
                 Authorization: localStorage.getItem("token")
             }
